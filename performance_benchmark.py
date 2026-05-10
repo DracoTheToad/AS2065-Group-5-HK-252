@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
 from sklearn.preprocessing import StandardScaler
 
 from utils import *
-from solvers import *
+from solver import *
 
 # Chuẩn bị dữ liệu
 data = fetch_california_housing()
@@ -24,11 +24,6 @@ start_time_normal = time.time()
 # w = (X^T X)^-1 X^T y
 w_normal = solve_normal_equation(X_with_bias, y)
 time_normal = time.time() - start_time_normal
-
-# Đo thời gian Gradient Descent thủ tục quay lui
-start_time_grad = time.time()
-w_grad = grad_descent(X_with_bias, y, tol=1e-3, max_iter=1000, random_state=42)
-time_grad_backtrack = time.time() - start_time_grad
 
 # Đo thời gian giải trực tiếp bằng sklearn
 sk_lin_model = LinearRegression()
@@ -55,7 +50,6 @@ plt.grid(axis='y', linestyle='--', alpha=0.6)
 
 # Thêm chú thích về kết quả
 print(f"Thời gian Normal Equation: {time_normal:.6f}s")
-print(f"Thời gian Gradient Descent: {time_grad_backtrack:.6f}s")
 print(f"Thời gian Normal Equation: {time_sk_lin:.6f}s")
 print(f"Thời gian Gradient Descent: {time_sgd:.6f}s")
 
